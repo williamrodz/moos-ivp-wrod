@@ -2,7 +2,6 @@ clean.sh
 /data/
 README
 /scripts/
-/src/
-!/src/pOdometry/
+
 .DS_Store
 /missions/xrelay/
