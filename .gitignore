@@ -1,7 +1,7 @@
 clean.sh
-data/
+/data/
 README
-scripts/
-src/
-!src/pOdometry/
+/scripts/
+/src/
+!/src/pOdometry/
 .DS_Store
