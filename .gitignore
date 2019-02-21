@@ -2,6 +2,9 @@ clean.sh
 /data/
 README
 /scripts/
-
+/src/CMakeLists.txt
+/src/lib_behaviors-test/
+/src/pExampleApp/
+/src/pXRelayTest/
 .DS_Store
 /missions/xrelay/
