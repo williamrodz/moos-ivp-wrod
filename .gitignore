@@ -3,8 +3,8 @@ data/
 pOdometry/
 README
 scripts/
-src/CMakeLists.txt
-src/lib_behaviors-test/
-src/pExampleApp/
-src/pXRelayTest/
+#src/CMakeLists.txt
+#src/lib_behaviors-test/
+#src/pExampleApp/
+#src/pXRelayTest/
 .DS_Store
