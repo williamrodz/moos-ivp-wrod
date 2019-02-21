@@ -17,12 +17,12 @@ using namespace std;
 Odometry::Odometry()
 {
     m_first_reading = true;
+    // All values are set to zero at beginning since heading from origin
     m_current_x = 0;
     m_current_y = 0;
     m_previous_x = 0;
     m_previous_y = 0;
     m_total_distance = 0;
-    //m_msgs = "";
 }
 
 //---------------------------------------------------------
@@ -39,11 +39,6 @@ bool Odometry::OnNewMail(MOOSMSG_LIST &NewMail)
 {
   AppCastingMOOSApp::OnNewMail(NewMail);        // Add this line
   MOOSMSG_LIST::iterator p;
-    
-
-    
-
-    
     
    
   for(p=NewMail.begin(); p!=NewMail.end(); p++) {
@@ -69,7 +64,6 @@ bool Odometry::OnNewMail(MOOSMSG_LIST &NewMail)
           m_previous_y = m_current_y;
           m_current_y = msg.GetDouble();
       }
-//#endif
    }
 	
    return(true);
@@ -85,7 +79,7 @@ bool Odometry::OnConnectToServer()
    // m_MissionReader.GetConfigurationParam("Name", <string>);
    // m_Comms.Register("VARNAME", 0);
     
-    // Hopefully registers variables
+    // Registers variables on connection to server
    RegisterVariables();
 
 
@@ -98,10 +92,9 @@ bool Odometry::OnConnectToServer()
 
 bool Odometry::Iterate()
 {
-    AppCastingMOOSApp::Iterate(); //Added this line
-  //calculate new distance
+    AppCastingMOOSApp::Iterate(); //Added this line for AppCast
+  // first reading, don't do anything out of recognizing this
     if (m_first_reading){
-        m_total_distance += 0;
         m_first_reading = false;
     } else{
         double xDisplacement = (m_previous_x - m_current_x);
@@ -110,7 +103,7 @@ bool Odometry::Iterate()
         m_total_distance += sqrt((xDisplacement*xDisplacement)+(yDisplacement*yDisplacement));
         Notify("ODOMETRY_DIST",m_total_distance);
     }
-  AppCastingMOOSApp::PostReport(); //added this line
+  AppCastingMOOSApp::PostReport(); //added this for AppCast
   return(true);
 }
 
@@ -149,7 +142,7 @@ bool Odometry::OnStartUp()
 void Odometry::RegisterVariables()
 {
     AppCastingMOOSApp::RegisterVariables();      // Add this line
-  // Register("FOOBAR", 0);
+  // Register variables here, second input is optional;
     Register("NAV_X",0);
     Register("NAV_Y",0);
 
